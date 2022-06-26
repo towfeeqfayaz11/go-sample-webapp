@@ -24,7 +24,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 var tpl *template.Template
 
 func init() {
-	tpl = template.Must(template.ParseGlob("./static/*.html"))
+	tpl = template.Must(template.ParseGlob("./templates/*.html"))
 }
 
 func formHandler(w http.ResponseWriter, r *http.Request) {
@@ -45,7 +45,7 @@ func processFormHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fileServer := http.FileServer(http.Dir("./static")) // will by default search for index.html if not specified otherwise
+	fileServer := http.FileServer(http.Dir("./templates")) // will by default search for index.html if not specified otherwise
 	http.Handle("/", fileServer)
 	http.HandleFunc("/form", formHandler)
 	http.HandleFunc("/process", processFormHandler)
